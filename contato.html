@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-br" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contato</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .color-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: box-shadow 0.2s, border 0.2s;
+            box-shadow: 0 0 0 2px #0002;
+        }
+
+        .color-dot:hover,
+        .color-dot.active {
+            border: 2px solid #222;
+            box-shadow: 0 0 8px 2px #0003;
+        }
+
+        .zoomable {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .zoomable:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-map {
+            width: 100%;
+            height: 500px;
+            border: 0;
+        }
+
+        @media (max-width: 767px) {
+            .navbar-nav {
+                text-align: center;
+            }
+
+            .card-img-top {
+                height: 140px;
+                object-fit: cover;
+            }
+
+            .contact-map {
+                height: 400px;
+            }
+        }
+
+        #zoomModal .modal-dialog {
+            max-width: fit-content;
+            width: auto;
+            margin: auto;
+        }
+
+        #zoomModal .modal-content {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 0;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+
+        #zoomModal .modal-body {
+            padding: 0;
+        }
+
+        #zoomedImg {
+            display: block;
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <img src="img/Jessica/Logotipo.jpeg" alt="Clinica" width="40" height="50" class="me-3 zoomable">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="habilidade.html">Habilidade</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contato.html">Contato</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center ms-3">
+                    <div class="color-dot mx-1" style="background:#f8d568;" data-bg="#f8d568" title="Amarelo"></div>
+                    <div class="color-dot mx-1" style="background:#6dd47e;" data-bg="#6dd47e" title="Verde"></div>
+                    <div class="color-dot mx-1" style="background:#6ec6ff;" data-bg="#6ec6ff" title="Azul"></div>
+                    <div class="color-dot mx-1" style="background:#f67280;" data-bg="#f67280" title="Rosa"></div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo -->
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Clinica Estetica Facial</h1>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- Formulário -->
+        <div class="col-md-6">
+            <div class="card bg-dark text-white p-3">
+                <h4 class="mb-3">Agende seu atendimento</h4>
+                <input type="text" id="nomeCliente" class="form-control mb-2" placeholder="Seu nome">
+                <input type="text" id="telefoneCliente" class="form-control mb-2" placeholder="Telefone com DDD">
+
+                <select id="servicoCliente" class="form-control mb-2">
+                    <option value="">Selecione o serviço desejado</option>
+                    <option>Alopecia</option>
+                    <option>Laser Terapia</option>
+                    <option>Microagulhamento</option>
+                    <option>Psoríase</option>
+                    <option>Alta Frequência</option>
+                    <option>Coceira</option>
+                    <option>Caspa</option>
+                    <option>Ozônio Terapia</option>
+                    <option>Oleosidade</option>
+                    <option>Queda capilar</option>
+                    <option>Falhas na barba</option>
+                    <option>Falhas na sobrancelha</option>
+                    <option>Dermatite</option>
+                    <option>Inflamações</option>
+                    <option>Intradermoterapia</option>
+                    <option>Led Terapia</option>
+                    <option>Ilib Terapia</option>
+                    <option>Tricologia</option>
+                </select>
+
+                <textarea class="form-control mb-2" id="mensagem" rows="3" placeholder="Mensagem (opcional)"></textarea>
+            </div>
+        </div>
+
+        <!-- Calendário -->
+        <div class="col-md-6">
+            <div class="card bg-dark text-white p-3">
+                <h4 class="mb-3">Escolha data e horário</h4>
+                <input type="text" id="dataHora" class="form-control mb-2" placeholder="Escolha a data e horário">
+                <button id="btnAgendar" class="btn btn-primary w-100 mt-2">Agendar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Mapa -->
+    <div class="my-4" id="mapa">
+        <iframe class="contact-map" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.622564417169!2d-45.8774024244249!3d-23.18501657904719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4b6af2c3c6f3%3A0xc648792cc41005a7!2sR.%20Vinte%20e%20Sete%20de%20Julho%2C%2041%20-%20Monte%20Castelo%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos%20-%20SP%2C%2012215-100!5e0!3m2!1spt-BR!2sbr!4v1728834925785!5m2!1spt-BR!2sbr"></iframe>
+    </div>
+
+    <!-- Modal Zoom -->
+    <div class="modal fade" id="zoomModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light text-center">
+                <div class="modal-body p-0">
+                    <img id="zoomedImg" class="img-fluid">
+                    <p id="zoomedText" class="mt-2"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div>
+            <i class="bi bi-whatsapp mx-3" style="font-size:2rem;color:#25D366;"></i>
+            <i class="bi bi-linkedin" style="font-size:2rem;color:#0077B5;"></i>
+            <i class="bi bi-instagram mx-3" style="font-size:2rem;color:#E4405F;"></i>
+            <i class="bi bi-envelope-fill mx-3" style="font-size:2rem;color:#EA4335;"></i>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FLATPICKR -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#dataHora", {
+            enableTime: true,
+            time_24hr: true,
+            minuteIncrement: 15,
+            dateFormat: "d-m-Y H:i",
+            minDate: "today",
+            minTime: "08:00",
+            maxTime: "18:00",
+            disable: [date => date.getDay() === 0],
+            defaultDate: new Date(new Date().getTime() - 3 * 60 * 60 * 1000)
+        });
+    </script>
+
+    <!-- Script: Zoom no Logo -->
+    <script>
+        document.querySelectorAll(".zoomable").forEach(img => {
+            img.addEventListener("click", () => {
+                document.getElementById("zoomedImg").src = img.src;
+                document.getElementById("zoomedText").innerText = img.alt || "";
+                let zoomModal = new bootstrap.Modal(document.getElementById("zoomModal"));
+                zoomModal.show();
+            });
+        });
+    </script>
+
+    <!-- Script: Envio do formulário para n8n -->
+    <script>
+        document.getElementById("btnAgendar").addEventListener("click", function () {
+            const nome = document.getElementById("nomeCliente").value;
+            const telefone = document.getElementById("telefoneCliente").value;
+            const servico = document.getElementById("servicoCliente").value;
+            const mensagem = document.getElementById("mensagem").value;
+            const dataHora = document.getElementById("dataHora").value;
+
+            fetch("https://SEU_N8N_ENDPOINT_AQUI", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nome, telefone, servico, mensagem, dataHora })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Agendamento enviado com sucesso!");
+                        document.getElementById("nomeCliente").value = "";
+                        document.getElementById("telefoneCliente").value = "";
+                        document.getElementById("servicoCliente").value = "";
+                        document.getElementById("mensagem").value = "";
+                        document.getElementById("dataHora").value = "";
+                    } else {
+                        alert("Erro ao enviar agendamento.");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Erro ao enviar agendamento.");
+                });
+        });
+    </script>
+
+</body>
+
+</html>

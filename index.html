@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="pt-br" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - Clínica Capilar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --card-height: 180px;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .card-img-wrapper {
+      height: var(--card-height);
+      overflow: hidden;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+
+    .card-img-wrapper img:hover {
+      transform: scale(1.05);
+    }
+
+    #zoomedImg {
+      max-height: 60vh;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    /* ✅ AQUI ENTRA O NOVO CSS DO MODAL ✅ */
+    #zoomModal .modal-dialog {
+      max-width: fit-content;
+      width: auto;
+      margin: auto;
+    }
+
+    #zoomModal .modal-content {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 0;
+      border: none;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+
+    #zoomModal .modal-body {
+      padding: 0;
+    }
+
+    #zoomedImg {
+      display: block;
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <img src="img/Jessica/Logotipo.jpeg" alt="Clinica" width="40" height="50" class="me-3 zoomable">
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navbarNav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="habilidade.html">Habilidade</a></li>
+          <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+        </ul>
+
+        <!-- ✅ BOLINHAS DE CORES AQUI -->
+        <div class="d-flex align-items-center ms-3">
+          <div class="color-dot mx-2" style="background:#f8d568" data-bg="#f8d568" title="Amarelo"></div>
+          <div class="color-dot mx-2" style="background:#923892" data-bg="#923892" title="Roxo"></div>
+          <div class="color-dot mx-2" style="background:#79812a" data-bg="#79812a" title="Verde"></div>
+          <div class="color-dot mx-2" style="background:#5e3a19" data-bg="#5e3a19" title="Marrom"></div>
+        </div>
+        <!-- ✅ FIM DAS BOLINHAS -->
+
+      </div>
+    </div>
+  </nav>
+  <script>
+    document.querySelectorAll(".color-dot").forEach(dot => {
+      dot.addEventListener("click", () => {
+
+        // Muda a cor do fundo conforme o data-bg da bolinha
+        document.body.style.backgroundColor = dot.dataset.bg;
+
+        // Remove a seleção das outras bolinhas
+        document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+
+        // Deixa a bolinha clicada como ativa
+        dot.classList.add("active");
+      });
+    });
+  </script>
+
+  <!-- CARROSSEL HOME -->
+  <div id="carouselHome" class="carousel slide my-4" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/Capilar/Alta_frequência/imagem1.jpg" class="d-block w-100 zoomable">
+      </div>
+      <div class="carousel-item">
+        <img src="img/Facial/Limpeza_de_pele/image3.jpg" class="d-block w-100 zoomable">
+      </div>
+      <div class="carousel-item">
+        <img src="img/Capilar/ILIB_terapia/image2.jpg" class="d-block w-100 zoomable">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <style>
+    #carouselHome img {
+      height: 300px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 767px) {
+      #carouselHome img {
+        height: 200px;
+      }
+    }
+  </style>
+
+  <script>
+    var carouselHome = document.querySelector('#carouselHome');
+    var homeCarousel = new bootstrap.Carousel(carouselHome, {
+      interval: 3000,
+      ride: 'carousel',
+      pause: false
+    });
+  </script>
+
+
+  <!-- FORMULÁRIO DE AGENDAMENTO -->
+  <div class="container my-5">
+    <div class="d-flex justify-content-between align-items-start flex-wrap">
+      <h1 class="mb-3" style="color: yellow;">Bem-vindo à Clínica Capilar</h1>
+
+      <!-- Botão que leva para contato -->
+      <a href="contato.html" class="btn btn-primary">Agende Agora</a>
+    </div>
+  </div>
+
+
+  <!-- FLATPICKR -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <script>
+    flatpickr("#dataHora", {
+      enableTime: true,
+      time_24hr: true,
+      minuteIncrement: 1,
+      dateFormat: "d-m-Y H:i",
+      minDate: "today",
+      minTime: "08:00",
+      maxTime: "18:00",
+      disable: [date => date.getDay() === 0]
+    });
+  </script>
+
+  <!-- ✅ CARDS (AGORA ESTÃO NO LUGAR CERTO) -->
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-2">
+
+      <!-- CARD 1 -->
+      <div class="col">
+        <div class="card h-100 text-center">
+          <div class="card-img-wrapper">
+            <img src="img/Jessica/img2.jpeg" class="zoomable" alt="Laser Capilar">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Laser Capilar</h5>
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalLaser">Saiba
+              mais</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="col">
+        <div class="card h-100 text-center">
+          <div class="card-img-wrapper">
+            <img src="img/Jessica/img1.jpeg" class="zoomable" alt="Especialista 2">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Aromaterapia</h5>
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalEsp2">Saiba
+              mais</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="col">
+        <div class="card h-100 text-center">
+          <div class="card-img-wrapper">
+            <img src="img/Jessica/img3.jpeg" class="zoomable" alt="Especialista 3">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Ilib Terapia</h5>
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalEsp3">Saiba
+              mais</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="col">
+        <div class="card h-100 text-center">
+          <div class="card-img-wrapper">
+            <img src="img/Jessica/img4.jpeg" class="zoomable" alt="Especialista 4">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Intradermoterapia capilar</h5>
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalEsp4">Saiba
+              mais</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="col">
+        <div class="card h-100 text-center">
+          <div class="card-img-wrapper">
+            <img src="img/Jessica/img5.jpeg" class="zoomable" alt="Especialista 5">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Microagulhamento capilar</h5>
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalEsp5">Saiba
+              mais</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="col">
+        <div class="card h-100 text-center">
+          <div class="card-img-wrapper">
+            <img src="img/Jessica/img6.jpeg" class="zoomable" alt="LED Terapia">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">LED Terapia</h5>
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalLed">Saiba
+              mais</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ✅ MODAIS (AGORA ESTÃO FORA DO GRID!) -->
+  <!-- Modal Laser -->
+  <div class="modal fade" id="modalLaser" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Laser Capilar</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Laser capilar é um tratamento estético que usa luz de baixa intensidade (LLLT) para estimular o crescimento do
+          cabelo e combater a queda.
+          Ele atua aumentando a circulação sanguínea no couro cabeludo, levando mais nutrientes e oxigênio para os
+          folículos pilosos, o que resulta em fios mais fortes e saudáveis.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Esp 2 -->
+  <div class="modal fade" id="modalEsp2">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Aromaterapia</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Aromaterapia é uma prática terapêutica que usa óleos essenciais extraídos de plantas para promover o bem-estar
+          físico,
+          mental e emocional. Ela atua através do olfato e da absorção pela pele, estimulando o sistema límbico do
+          cérebro para tratar condições como estresse, ansiedade, insônia e dores.
+          A aromaterapia é considerada um método complementar a outros tratamentos de saúde.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Esp 3 -->
+  <div class="modal fade" id="modalEsp3">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Ilib Terapia</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          A Terapia ILIB (Irradiação Intravascular do Sangue por Laser) é um tratamento não invasivo que utiliza laser
+          de baixa intensidade para irradiar o sangue,
+          geralmente na artéria radial no pulso. Seus objetivos são estimular a regeneração celular, combater radicais
+          livres e inflamações, melhorar a oxigenação do sangue e fortalecer o sistema imunológico.
+          Essa técnica é utilizada para auxiliar no tratamento de diversas condições, incluindo doenças crônicas,
+          inflamatórias e cardiovasculares, além de promover recuperação e bem-estar geral.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Esp 4 -->
+  <div class="modal fade" id="modalEsp4">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Intradermoterapia capilar</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          A intradermoterapia capilar é uma técnica minimamente invasiva que consiste em aplicar microinjeções de
+          medicamentos e substâncias ativas diretamente no couro cabeludo para tratar a queda de cabelo e estimular o
+          crescimento dos fios.
+          O procedimento utiliza agulhas finas para entregar substâncias como vitaminas, minerais, aminoácidos, fatores
+          de crescimento e medicamentos específicos, como o minoxidil, diretamente nos folículos capilares. Isso permite
+          uma absorção mais rápida e eficaz,
+          pois os ativos não precisam passar pela circulação geral.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Esp 5 -->
+  <div class="modal fade" id="modalEsp5">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Microagulhamento capilar</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          O microagulhamento capilar é uma técnica minimamente invasiva que utiliza microagulhas para criar pequenas
+          perfurações no couro cabeludo,
+          com o objetivo de estimular o crescimento e o fortalecimento dos fios. Ao causar microlesões controladas, o
+          procedimento ativa a resposta natural de regeneração da pele,
+          o que inclui a formação de novos vasos sanguíneos (neovascularização), a liberação de fatores de crescimento e
+          a produção de colágeno e elastina. Além disso,
+          as microperfurações facilitam a absorção de medicamentos e ativos terapêuticos (como minoxidil e vitaminas),
+          potencializando sua eficácia no tratamento de condições como a queda de cabelo e a alopecia androgenética.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal LED -->
+  <div class="modal fade" id="modalLed">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">LED Terapia</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          A LEDterapia, também conhecida como fotobiomodulação, é um tratamento não invasivo que usa luz de baixa
+          potência para estimular a regeneração celular e regular processos biológicos.
+          Ela funciona estimulando as mitocôndrias a produzir mais energia (\(ATP\)), promovendo a melhoria da saúde da
+          pele e do cabelo, e sendo utilizada em áreas como estética, dermatologia, reabilitação e até para tratar a
+          queda de cabelo. 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-center text-white py-4 mt-5">
+    <div class="container d-flex justify-content-center gap-3">
+      <i class="bi bi-whatsapp" style="font-size:2rem;color:#25D366;"></i>
+      <i class="bi bi-linkedin" style="font-size:2rem;color:#0077B5;"></i>
+      <i class="bi bi-instagram" style="font-size:2rem;color:#E4405F;"></i>
+      <i class="bi bi-envelope-fill" style="font-size:2rem;color:#EA4335;"></i>
+    </div>
+  </footer>
+
+  <!-- MODAL DE ZOOM -->
+  <div class="modal fade" id="zoomModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-light text-center">
+        <div class="modal-body">
+          <img id="zoomedImg" class="img-fluid">
+          <p id="zoomedText" class="mt-2"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.querySelectorAll('.zoomable').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('zoomedImg').src = img.src;
+        document.getElementById('zoomedText').textContent = img.alt;
+        new bootstrap.Modal('#zoomModal').show();
+      });
+    });
+  </script>
+
+</body>
+
+</html>

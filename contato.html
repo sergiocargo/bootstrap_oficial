@@ -27,7 +27,7 @@
         }
 
         .color-dot:hover,
-        .color-dot.active {
+        a .color-dot.active {
             border: 2px solid #222;
             box-shadow: 0 0 8px 2px #0003;
         }
@@ -127,9 +127,11 @@
     <div class="row g-4 justify-content-center">
 
         <!-- Formulário -->
+        <!-- Formulário completo -->
         <div class="col-md-6">
             <div class="card bg-dark text-white p-3">
                 <h4 class="mb-3">Agende seu atendimento</h4>
+
                 <input type="text" id="nomeCliente" class="form-control mb-2" placeholder="Seu nome">
                 <input type="text" id="telefoneCliente" class="form-control mb-2" placeholder="Telefone com DDD">
 
@@ -157,7 +159,7 @@
 
                 <textarea class="form-control mb-2" id="mensagem" rows="3" placeholder="Mensagem (opcional)"></textarea>
             </div>
-        </div>
+        </div>       
 
         <!-- Calendário -->
         <div class="col-md-6">
@@ -173,7 +175,8 @@
     <!-- Mapa -->
     <div class="my-4" id="mapa">
         <iframe class="contact-map" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.622564417169!2d-45.8774024244249!3d-23.18501657904719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4b6af2c3c6f3%3A0xc648792cc41005a7!2sR.%20Vinte%20e%20Sete%20de%20Julho%2C%2041%20-%20Monte%20Castelo%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos%20-%20SP%2C%2012215-100!5e0!3m2!1spt-BR!2sbr!4v1728834925785!5m2!1spt-BR!2sbr"></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.622564417169!2d-45.8774024244249!3d-23.18501657904719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4b6af2c3c6f3%3A0xc648792cc41005a7!2sR.%20Vinte%20e%20Sete%20de%20Julho%2C%2041%20-%20Monte%20Castelo%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos%20-%20SP%2C%2012215-100!5e0!3m2!1spt-BR!2sbr!4v1728834925785!5m2!1spt-BR!2sbr">
+        </iframe>
     </div>
 
     <!-- Modal Zoom -->
@@ -214,7 +217,7 @@
             minTime: "08:00",
             maxTime: "18:00",
             disable: [date => date.getDay() === 0],
-            defaultDate: new Date(new Date().getTime() - 3 * 60 * 60 * 1000)
+            defaultDate: new Date()
         });
     </script>
 
@@ -230,39 +233,88 @@
         });
     </script>
 
-    <!-- Script: Envio do formulário para n8n -->
+    <!-- SCRIPT N8N -->
     <script>
-        document.getElementById("btnAgendar").addEventListener("click", function () {
-            const nome = document.getElementById("nomeCliente").value;
-            const telefone = document.getElementById("telefoneCliente").value;
-            const servico = document.getElementById("servicoCliente").value;
-            const mensagem = document.getElementById("mensagem").value;
-            const dataHora = document.getElementById("dataHora").value;
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("btnAgendar");
+            if (!btn) return;
 
-            fetch("https://SEU_N8N_ENDPOINT_AQUI", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ nome, telefone, servico, mensagem, dataHora })
-            })
-                .then(response => {
-                    if (response.ok) {
+            const WEBHOOK_URL = "http://localhost:5678/webhook/pergunta";
+
+            btn.addEventListener("click", async () => {
+                const nome = document.getElementById("nomeCliente").value.trim();
+                const telefone = document.getElementById("telefoneCliente").value.trim();
+                const servico = document.getElementById("servicoCliente").value.trim();
+                const mensagem = document.getElementById("mensagem").value.trim();
+                const dataHoraRaw = document.getElementById("dataHora").value.trim();
+
+                if (!nome || !telefone || !servico || !dataHoraRaw) {
+                    alert("Por favor, preencha todos os campos obrigatórios.");
+                    return;
+                }
+
+                // Converte para formato humano
+                const parts = dataHoraRaw.split(/[- :]/); // Flatpickr output: d-m-Y H:i
+                const dataHoraFormatada = `${parts[0].padStart(2, '0')}/${parts[1].padStart(2, '0')}/${parts[2]} horas ${parts[3].padStart(2, '0')}:${parts[4].padStart(2, '0')}`;
+
+                const payload = { nome, telefone, servico, mensagem, dataHora: dataHoraFormatada };
+
+                btn.disabled = true;
+                const oldText = btn.innerText;
+                btn.innerText = "Enviando...";
+
+                try {
+                    const res = await fetch(WEBHOOK_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const text = await res.text();
+
+                    if (res.ok) {
                         alert("Agendamento enviado com sucesso!");
                         document.getElementById("nomeCliente").value = "";
                         document.getElementById("telefoneCliente").value = "";
                         document.getElementById("servicoCliente").value = "";
                         document.getElementById("mensagem").value = "";
-                        document.getElementById("dataHora").value = "";
+                        flatpickr("#dataHora", {}).setDate(new Date(), true); // reseta para hora atual
                     } else {
-                        alert("Erro ao enviar agendamento.");
+                        alert("Erro ao enviar:\n" + text);
                     }
-                })
-                .catch(err => {
+
+                } catch (err) {
+                    alert("Erro ao enviar. Verifique o n8n.");
                     console.error(err);
-                    alert("Erro ao enviar agendamento.");
-                });
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = oldText;
+                }
+            });
         });
+    </script>
+
+    <!-- Script Cores -->
+    <script>
+        document.querySelectorAll(".color-dot").forEach(dot => {
+            dot.addEventListener("click", () => {
+                const cor = dot.getAttribute("data-bg");
+                document.body.style.backgroundColor = cor;
+                localStorage.setItem("corTema", cor);
+                document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+                dot.classList.add("active");
+            });
+        });
+
+        const corSalva = localStorage.getItem("corTema");
+        if (corSalva) {
+            document.body.style.backgroundColor = corSalva;
+            document.querySelectorAll(".color-dot").forEach(d => {
+                if (d.getAttribute("data-bg") === corSalva) {
+                    d.classList.add("active");
+                }
+            });
+        }
     </script>
 
 </body>

@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contato</title>
+    <title>Contato - Clínica Capilar</title>
 
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- FLATPICKR -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
         body {
@@ -27,7 +30,7 @@
         }
 
         .color-dot:hover,
-        a .color-dot.active {
+        .color-dot.active {
             border: 2px solid #222;
             box-shadow: 0 0 8px 2px #0003;
         }
@@ -52,16 +55,12 @@
                 text-align: center;
             }
 
-            .card-img-top {
-                height: 140px;
-                object-fit: cover;
-            }
-
             .contact-map {
                 height: 400px;
             }
         }
 
+        /* Modal zoom */
         #zoomModal .modal-dialog {
             max-width: fit-content;
             width: auto;
@@ -101,40 +100,36 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="habilidade.html">Habilidade</a></li>
                     <li class="nav-item"><a class="nav-link active" href="contato.html">Contato</a></li>
                 </ul>
 
+                <!-- Bolinhas de cores -->
                 <div class="d-flex align-items-center ms-3">
-                    <div class="color-dot mx-1" style="background:#f8d568;" data-bg="#f8d568" title="Amarelo"></div>
-                    <div class="color-dot mx-1" style="background:#6dd47e;" data-bg="#6dd47e" title="Verde"></div>
-                    <div class="color-dot mx-1" style="background:#6ec6ff;" data-bg="#6ec6ff" title="Azul"></div>
-                    <div class="color-dot mx-1" style="background:#f67280;" data-bg="#f67280" title="Rosa"></div>
+                    <div class="color-dot mx-2" style="background:#f8d568" data-bg="#f8d568" title="Amarelo"></div>
+                    <div class="color-dot mx-2" style="background:#923892" data-bg="#923892" title="Roxo"></div>
+                    <div class="color-dot mx-2" style="background:#79812a" data-bg="#79812a" title="Verde"></div>
+                    <div class="color-dot mx-2" style="background:#5e3a19" data-bg="#5e3a19" title="Marrom"></div>
                 </div>
-
             </div>
         </div>
     </nav>
 
     <!-- Conteúdo -->
     <div class="container my-5">
-        <h1 class="text-center mb-4">Clinica Estetica Facial</h1>
+        <h1 class="text-center mb-4">Clínica Estética Facial</h1>
     </div>
 
     <div class="row g-4 justify-content-center">
 
         <!-- Formulário -->
-        <!-- Formulário completo -->
         <div class="col-md-6">
             <div class="card bg-dark text-white p-3">
                 <h4 class="mb-3">Agende seu atendimento</h4>
-
                 <input type="text" id="nomeCliente" class="form-control mb-2" placeholder="Seu nome">
                 <input type="text" id="telefoneCliente" class="form-control mb-2" placeholder="Telefone com DDD">
-
                 <select id="servicoCliente" class="form-control mb-2">
                     <option value="">Selecione o serviço desejado</option>
                     <option>Alopecia</option>
@@ -156,12 +151,11 @@
                     <option>Ilib Terapia</option>
                     <option>Tricologia</option>
                 </select>
-
                 <textarea class="form-control mb-2" id="mensagem" rows="3" placeholder="Mensagem (opcional)"></textarea>
             </div>
-        </div>       
+        </div>
 
-        <!-- Calendário -->
+        <!-- Calendário e botão -->
         <div class="col-md-6">
             <div class="card bg-dark text-white p-3">
                 <h4 class="mb-3">Escolha data e horário</h4>
@@ -191,23 +185,39 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div>
-            <i class="bi bi-whatsapp mx-3" style="font-size:2rem;color:#25D366;"></i>
-            <i class="bi bi-linkedin" style="font-size:2rem;color:#0077B5;"></i>
-            <i class="bi bi-instagram mx-3" style="font-size:2rem;color:#E4405F;"></i>
-            <i class="bi bi-envelope-fill mx-3" style="font-size:2rem;color:#EA4335;"></i>
+    <footer class="bg-dark text-center text-white py-4 mt-5">
+        <div class="container d-flex justify-content-center gap-3">
+
+            <!-- WHATSAPP -->
+            <a href="https://wa.me/55SEUNUMERO" target="_blank">
+                <i class="bi bi-whatsapp" style="font-size:2rem;color:#25D366;"></i>
+            </a>
+
+            <!-- LINKEDIN -->
+            <a href="https://linkedin.com/in/SEUPERFIL" target="_blank">
+                <i class="bi bi-linkedin" style="font-size:2rem;color:#0077B5;"></i>
+            </a>
+
+            <!-- INSTAGRAM -->
+            <a href="https://instagram.com/SEUINSTAGRAM" target="_blank">
+                <i class="bi bi-instagram" style="font-size:2rem;color:#E4405F;"></i>
+            </a>
+
+            <!-- EMAIL -->
+            <a href="mailto:SEUEMAIL@gmail.com" target="_blank">
+                <i class="bi bi-envelope-fill" style="font-size:2rem;color:#EA4335;"></i>
+            </a>
+
         </div>
     </footer>
 
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- FLATPICKR -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <script>
+        // Inicializa Flatpickr
         flatpickr("#dataHora", {
             enableTime: true,
             time_24hr: true,
@@ -219,10 +229,8 @@
             disable: [date => date.getDay() === 0],
             defaultDate: new Date()
         });
-    </script>
 
-    <!-- Script: Zoom no Logo -->
-    <script>
+        // Zoom em imagens
         document.querySelectorAll(".zoomable").forEach(img => {
             img.addEventListener("click", () => {
                 document.getElementById("zoomedImg").src = img.src;
@@ -231,10 +239,27 @@
                 zoomModal.show();
             });
         });
-    </script>
 
-    <!-- SCRIPT N8N -->
-    <script>
+        // Script cores com localStorage
+        document.querySelectorAll(".color-dot").forEach(dot => {
+            dot.addEventListener("click", () => {
+                const cor = dot.dataset.bg;
+                document.body.style.backgroundColor = cor;
+                localStorage.setItem("corTema", cor);
+                document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+                dot.classList.add("active");
+            });
+        });
+
+        const corSalva = localStorage.getItem("corTema");
+        if (corSalva) {
+            document.body.style.backgroundColor = corSalva;
+            document.querySelectorAll(".color-dot").forEach(d => {
+                if (d.dataset.bg === corSalva) d.classList.add("active");
+            });
+        }
+
+        // Script envio n8n
         document.addEventListener("DOMContentLoaded", () => {
             const btn = document.getElementById("btnAgendar");
             if (!btn) return;
@@ -253,9 +278,8 @@
                     return;
                 }
 
-                // Converte para formato humano
-                const parts = dataHoraRaw.split(/[- :]/); // Flatpickr output: d-m-Y H:i
-                const dataHoraFormatada = `${parts[0].padStart(2, '0')}/${parts[1].padStart(2, '0')}/${parts[2]} horas ${parts[3].padStart(2, '0')}:${parts[4].padStart(2, '0')}`;
+                const parts = dataHoraRaw.split(/[- :]/);
+                const dataHoraFormatada = `${parts[0].padStart(2, '0')}/${parts[1].padStart(2, '0')}/${parts[2]} ${parts[3].padStart(2, '0')}:${parts[4].padStart(2, '0')}`;
 
                 const payload = { nome, telefone, servico, mensagem, dataHora: dataHoraFormatada };
 
@@ -278,7 +302,7 @@
                         document.getElementById("telefoneCliente").value = "";
                         document.getElementById("servicoCliente").value = "";
                         document.getElementById("mensagem").value = "";
-                        flatpickr("#dataHora", {}).setDate(new Date(), true); // reseta para hora atual
+                        flatpickr("#dataHora", {}).setDate(new Date(), true);
                     } else {
                         alert("Erro ao enviar:\n" + text);
                     }
@@ -292,29 +316,6 @@
                 }
             });
         });
-    </script>
-
-    <!-- Script Cores -->
-    <script>
-        document.querySelectorAll(".color-dot").forEach(dot => {
-            dot.addEventListener("click", () => {
-                const cor = dot.getAttribute("data-bg");
-                document.body.style.backgroundColor = cor;
-                localStorage.setItem("corTema", cor);
-                document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
-                dot.classList.add("active");
-            });
-        });
-
-        const corSalva = localStorage.getItem("corTema");
-        if (corSalva) {
-            document.body.style.backgroundColor = corSalva;
-            document.querySelectorAll(".color-dot").forEach(d => {
-                if (d.getAttribute("data-bg") === corSalva) {
-                    d.classList.add("active");
-                }
-            });
-        }
     </script>
 
 </body>

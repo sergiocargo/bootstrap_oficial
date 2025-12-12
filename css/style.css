@@ -30,12 +30,12 @@ body {
 
 .color-dot:hover {
   transform: scale(1.15);
-  box-shadow: 0 0 8px rgba(255,255,255,0.4);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .color-dot.active {
   transform: scale(1.25);
-  box-shadow: 0 0 12px rgba(255,255,255,0.6);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 /* ================================
@@ -100,10 +100,10 @@ body {
 }
 
 #zoomModal .modal-content {
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   padding: 0;
   border: none;
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 #zoomModal .modal-body {
@@ -118,7 +118,7 @@ body {
   margin: 0 auto;
 }
 
-/* ================================
+/* ================================s
       RESPONSIVIDADE
 =================================== */
 @media (max-width: 991px) {
@@ -131,4 +131,22 @@ body {
   .card-img-wrapper {
     height: 180px;
   }
+}
+
+.zoomable {
+  transition: transform .3s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.zoomable:hover {
+  transform: scale(1.1);
+}
+.zoomable {
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.zoomable:hover {
+  transform: scale(1.03);
 }

@@ -7,7 +7,6 @@
   <title>Home - Clínica Capilar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="css/style.css">
 
   <style>
     :root {
@@ -60,12 +59,44 @@
       padding: 0;
     }
 
-    #zoomedImg {
-      display: block;
-      max-width: 90vw;
-      max-height: 80vh;
-      object-fit: contain;
-      margin: 0 auto;
+
+    @media (max-width: 767px) {
+      #carouselHome img {
+        height: 200px;
+      }
+    }
+
+    /* BOLINHAS DE CORES */
+    .color-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      border: 2px solid #fff;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 8px rgba(255, 255, 255, .4);
+    }
+
+    .color-dot.active {
+      transform: scale(1.25);
+      box-shadow: 0 0 12px rgba(255, 255, 255, .6);
+    }
+
+    /* CARROSSEL */
+    #carouselHome img {
+      height: 300px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      #carouselHome img {
+        height: 200px;
+      }
     }
   </style>
 
@@ -101,7 +132,9 @@
           <div class="color-dot mx-2" style="background:#5e3a19" data-bg="#5e3a19" title="Marrom"></div>
         </div>
 
+
       </div>
+
     </div>
   </nav>
 
@@ -132,29 +165,9 @@
       <span class="carousel-control-next-icon"></span>
     </button>
   </div>
-
-  <style>
-    #carouselHome img {
-      height: 300px;
-      object-fit: cover;
-    }
-
-    @media (max-width: 767px) {
-      #carouselHome img {
-        height: 200px;
-      }
-    }
-  </style>
-
-  <script>
-    var carouselHome = document.querySelector('#carouselHome');
-    var homeCarousel = new bootstrap.Carousel(carouselHome, {
-      interval: 3000,
-      ride: 'carousel',
-      pause: false
-    });
-  </script>
-
+  <!-- SCRIPTS FINAIS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/java.js"></script>
 
   <!-- FORMULÁRIO DE AGENDAMENTO -->
   <div class="container my-5">
@@ -435,21 +448,6 @@
     </div>
   </div>
 
-  <!-- SCRIPTS FINAIS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/java.js"></script>
-
-  <script>
-    // Ativa zoom ao clicar em .zoomable
-    document.addEventListener("click", function (e) {
-      if (e.target.classList.contains("zoomable")) {
-        const imgSrc = e.target.getAttribute("src");
-        document.getElementById("zoomedImg").src = imgSrc;
-        const zoomModal = new bootstrap.Modal(document.getElementById("zoomModal"));
-        zoomModal.show();
-      }
-    });
-  </script>
 
 </body>
 

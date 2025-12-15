@@ -48,8 +48,8 @@ body {
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
   height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
@@ -59,16 +59,16 @@ body {
 
 .card-img-wrapper {
   width: 100%;
-  overflow: hidden;
   height: var(--card-height);
+  overflow: hidden;
 }
 
 .card-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .card-img-wrapper img:hover {
@@ -85,29 +85,30 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.btn-outline-light {
-  font-size: 0.85rem;
-  padding: 0.25rem 0.5rem;
+/* ================================
+      ZOOM (IMAGENS)
+=================================== */
+.zoomable {
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.zoomable:hover {
+  transform: scale(1.05);
 }
 
 /* ================================
-      MODAL DE ZOOM — PADRÃO GLOBAL
+      MODAL DE ZOOM
 =================================== */
 #zoomModal .modal-dialog {
   max-width: fit-content;
-  width: auto;
   margin: auto;
 }
 
 #zoomModal .modal-content {
   background: rgba(0, 0, 0, 0.85);
-  padding: 0;
   border: none;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-}
-
-#zoomModal .modal-body {
-  padding: 0;
 }
 
 #zoomedImg {
@@ -118,7 +119,15 @@ body {
   margin: 0 auto;
 }
 
-/* ================================s
+/* ================================
+      CARROSSEL HOME
+=================================== */
+#carouselHome img {
+  height: 320px;
+  object-fit: cover;
+}
+
+/* ================================
       RESPONSIVIDADE
 =================================== */
 @media (max-width: 991px) {
@@ -127,26 +136,12 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .card-img-wrapper {
     height: 180px;
   }
-}
 
-.zoomable {
-  transition: transform .3s ease;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.zoomable:hover {
-  transform: scale(1.1);
-}
-.zoomable {
-  cursor: pointer;
-  transition: transform .2s;
-}
-
-.zoomable:hover {
-  transform: scale(1.03);
+  #carouselHome img {
+    height: 200px;
+  }
 }
